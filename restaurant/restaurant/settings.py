@@ -109,3 +109,7 @@ AUTH_USER_MODEL = 'food.CustomUser'
 # Default primary key
 # -------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+PORT = os.environ.get('PORT', '8000')
+
