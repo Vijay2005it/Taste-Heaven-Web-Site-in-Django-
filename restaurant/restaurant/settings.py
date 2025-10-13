@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import dj_database_url
 
 # -------------------------------
 # Base directory
@@ -57,27 +58,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'restaurant.wsgi.application'
 
 # -------------------------------
-# Database (local default)
+# Database Configuration
 # -------------------------------
+# For Render (uses environment variables)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'food'),
-        'USER': os.environ.get('DB_USER', 'root'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'Vijay@122005'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '3306'),
-    }
+    'default': dj_database_url.config(
+        default=f"mysql://{os.environ.get('DB_USER', 'root')}:{os.environ.get('DB_PASSWORD', 'Vijay@122005')}@{os.environ.get('DB_HOST', 'localhost')}/{os.environ.get('DB_NAME', 'food')}",
+        conn_max_age=600,
+    )
 }
 
 # -------------------------------
 # Password validation
 # -------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # -------------------------------
@@ -110,6 +108,7 @@ AUTH_USER_MODEL = 'food.CustomUser'
 # -------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import os
+# -------------------------------
+# Render-specific port config
+# -------------------------------
 PORT = os.environ.get('PORT', '8000')
-
