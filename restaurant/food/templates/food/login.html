@@ -1,0 +1,90 @@
+{% extends "food/base.html" %}
+{% block content %}
+{% include "food/includes/error.html" %}
+
+<section class="d-flex justify-content-center align-items-center py-5 mt-5" 
+         style="min-height: 90vh; background: #fffaf3;">
+  <div class="card shadow-lg border-0 p-5" 
+       style="max-width: 420px; width: 100%; border-radius: 20px; background: #ffffff;">
+    
+    <h2 class="text-center mb-4 fw-bold" style="color: #b45309; font-family: 'Playfair Display', serif;">
+      👨‍🍳 Welcome Back
+    </h2>
+    <p class="text-center text-muted mb-4">Login to continue your TasteHeaven journey</p>
+
+    <form method="post" class="text-start">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="fw-semibold">Username</label>
+        <input id="username" type="text" name="username" 
+               class="form-control p-3 border-2"
+               style="border-radius: 10px; border-color: #facc15;"
+               placeholder="Enter your username" required>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="fw-semibold">Password</label>
+        <input id="password" type="password" name="password" 
+               class="form-control p-3 border-2"
+               style="border-radius: 10px; border-color: #facc15;"
+               placeholder="Enter your password" required>
+      </div>
+
+      <!-- Role -->
+      <div class="mb-4">
+        <label for="role" class="fw-semibold">Login as</label>
+        <select id="role" name="user_type" 
+                class="form-select p-3 border-2"
+                style="border-radius: 10px; border-color: #facc15;" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" 
+              class="btn w-100 py-2 fw-semibold text-dark shadow-sm" 
+              style="background-color: #facc15; border-radius: 50px;">
+        Login
+      </button>
+
+      <!-- Register link -->
+      <p class="text-center mt-4 mb-0 text-muted">
+        Don’t have an account?
+        <a href="{% url 'food:register' %}" class="fw-bold text-decoration-none" style="color:#b45309;">
+          Register
+        </a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .card {
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  }
+
+  input:focus, select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(250, 204, 21, 0.25);
+    border-color: #facc15 !important;
+  }
+
+  button:hover {
+    background-color: #fbbf24 !important;
+  }
+</style>
+
+{% endblock content %}

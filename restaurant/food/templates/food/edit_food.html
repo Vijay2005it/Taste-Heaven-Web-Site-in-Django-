@@ -1,0 +1,66 @@
+{% extends 'food/base.html' %}
+{% block content %}
+{% include "food/includes/error.html" %}
+
+<section class="d-flex align-items-center justify-content-center py-5"
+         style="min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+                 url('https://images.unsplash.com/photo-1600891963928-cd3e74dd1a2a?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;">
+  
+  <div class="card shadow-lg p-5 text-white w-100"
+       style="max-width: 600px; border: none; border-radius: 20px;
+              background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(10px);">
+              
+    <h2 class="text-center mb-4 fw-bold" style="color: #fbbf24; font-family: 'Playfair Display', serif;">
+      ✏️ Edit Food Item
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data" class="text-start">
+      {% csrf_token %}
+      <div class="form-fields text-light">
+        {{ form.as_p }}
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit"
+                class="btn btn-warning px-4 py-2 fw-semibold rounded-pill shadow-sm text-dark">
+          <i class="bi bi-save me-2"></i> Update Item
+        </button>
+        <a href="{% url 'food:admin_dashboard' %}"
+           class="btn btn-outline-light px-4 py-2 rounded-pill ms-2 fw-semibold">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  form input, form select, form textarea {
+    background-color: rgba(255,255,255,0.15) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  form input:focus, form select:focus, form textarea:focus {
+    box-shadow: 0 0 0 0.2rem rgba(251,191,36,0.25);
+    border-color: #fbbf24 !important;
+  }
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .card {
+    animation: fadeIn 1s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+{% endblock %}

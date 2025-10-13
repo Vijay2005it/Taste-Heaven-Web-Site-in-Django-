@@ -1,0 +1,57 @@
+{% extends 'food/base.html' %}
+{% block content %}
+
+<section class="py-5" style="background-color: #fffaf3;">
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg border-0 text-center p-5 rounded-4" style="max-width: 500px;">
+      
+      <!-- Success Icon -->
+      <div class="mb-4">
+        <div class="rounded-circle mx-auto d-flex justify-content-center align-items-center"
+             style="width: 90px; height: 90px; background-color: #dcfce7;">
+          <span style="font-size: 3rem; color: #16a34a;">✅</span>
+        </div>
+      </div>
+
+      <h3 class="fw-bold text-success mb-3">Order Placed Successfully!</h3>
+      <p class="text-muted mb-4">
+        Thank you for choosing <span class="fw-semibold text-dark">TasteHeaven</span> 🍽️<br>
+        Your delicious order will be prepared shortly!
+      </p>
+
+      <a href="{% url 'food:main' %}" 
+         class="btn text-dark fw-semibold py-2 px-4 w-100 rounded-pill shadow-sm"
+         style="background-color: #facc15;">
+         ← Back to Home
+      </a>
+
+      <a href="{% url 'food:feedback' %}"
+        class="btn text-dark fw-semibold py-2 w-100 rounded-pill shadow-sm mt-3"
+        style="background-color: #11b447ff;">
+      Feedback⭐
+    </a>
+    </div>
+  </div>
+</section>
+
+<!-- Subtle animation -->
+<style>
+  .card {
+    animation: fadeInUp 0.7s ease-in-out;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .btn:hover {
+    background-color: #fbbf24 !important;
+  }
+</style>
+
+
+<script>
+  setTimeout(() =>{
+    window.location.href="{% url 'food:main' %}";
+  },5000) 
+</script>
+{% endblock %}

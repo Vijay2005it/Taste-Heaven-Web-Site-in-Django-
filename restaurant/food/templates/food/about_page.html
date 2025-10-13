@@ -1,0 +1,117 @@
+{% extends 'food/base.html' %}
+{% block content %}
+
+<!-- ===== ABOUT HERO ===== -->
+<section class="hero d-flex align-items-center justify-content-center text-center text-white position-relative"
+  style="min-height: 65vh; background: url('https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;">
+  
+  <div class="overlay position-absolute w-100 h-100" style="background: rgba(0,0,0,0.6); top:0; left:0;"></div>
+  
+  <div class="hero-content position-relative p-4 rounded-4 shadow-lg"
+       style="backdrop-filter: blur(6px); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+    <h1 class="display-4 fw-bold mb-2" style="font-family: 'Playfair Display', serif;">
+      About <span class="text-warning">TasteHeaven</span>
+    </h1>
+    <p class="lead fst-italic">Serving love & delicious flavors since 2020 🍲</p>
+  </div>
+</section>
+
+<!-- ===== OUR STORY ===== -->
+<section class="about-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold display-6 mb-3" style="font-family:'Playfair Display',serif;">
+        Our <span class="text-warning">Story</span>
+      </h2>
+      <p class="text-muted w-75 mx-auto">
+        TasteHeaven began as a dream among food enthusiasts. Our mission is to deliver an unforgettable dining experience — where every bite tells a story. We use fresh, locally sourced ingredients and create dishes that blend tradition with innovation.
+      </p>
+    </div>
+
+    <div class="row text-center g-4">
+      <div class="col-md-4">
+        <div class="p-4 border-0 shadow-sm rounded-4 bg-light hover-card">
+          <i class="bi bi-heart-fill text-warning fs-1 mb-3"></i>
+          <h5 class="fw-semibold">Our Mission</h5>
+          <p class="text-muted small">To serve quality food made with love, freshness, and passion for taste.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 border-0 shadow-sm rounded-4 bg-light hover-card">
+          <i class="bi bi-stars text-warning fs-1 mb-3"></i>
+          <h5 class="fw-semibold">Our Vision</h5>
+          <p class="text-muted small">To become the ultimate food destination that celebrates joy and flavor.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 border-0 shadow-sm rounded-4 bg-light hover-card">
+          <i class="bi bi-emoji-smile-fill text-warning fs-1 mb-3"></i>
+          <h5 class="fw-semibold">Our Values</h5>
+          <p class="text-muted small">Creativity, Passion, Quality, and Customer Delight in every dish.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHEF TEAM ===== -->
+<section id="team" class="py-5 text-center text-dark" style="background:#fffaf3;">
+  <div class="container">
+    <h2 class="fw-bold mb-4" style="font-family:'Playfair Display',serif;">
+      Meet Our <span class="text-warning">Culinary Team</span>
+    </h2>
+
+    <div class="row justify-content-center g-4">
+      <div class="col-md-3">
+        <div class="team-card p-3 rounded-4 shadow-sm bg-white hover-scale">
+          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=500&q=80"
+               class="rounded-circle mb-3 shadow" width="140" height="140" style="object-fit:cover;">
+          <h5 class="fw-semibold mb-1">Chef Vijay</h5>
+          <p class="text-muted small mb-2">Head Chef</p>
+          <p class="small fst-italic">"Cooking is the art of transforming love into flavor."</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="team-card p-3 rounded-4 shadow-sm bg-white hover-scale">
+          <img src="https://images.unsplash.com/photo-1603415526960-f7e0328de23b?auto=format&fit=crop&w=500&q=80"
+               class="rounded-circle mb-3 shadow" width="140" height="140" style="object-fit:cover;">
+          <h5 class="fw-semibold mb-1">Chef Priya</h5>
+          <p class="text-muted small mb-2">Sous Chef</p>
+          <p class="small fst-italic">"Every dish has a story; I just help it find its voice."</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="team-card p-3 rounded-4 shadow-sm bg-white hover-scale">
+          <img src="https://images.unsplash.com/photo-1603415526908-6f6b2c3b6e2b?auto=format&fit=crop&w=500&q=80"
+               class="rounded-circle mb-3 shadow" width="140" height="140" style="object-fit:cover;">
+          <h5 class="fw-semibold mb-1">Chef Ravi</h5>
+          <p class="text-muted small mb-2">Pastry Chef</p>
+          <p class="small fst-italic">"Sweetness is the simplest form of happiness."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CUSTOM STYLES ===== -->
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .hover-card {
+    transition: all 0.3s ease-in-out;
+  }
+  .hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+  }
+  .hover-scale {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+  }
+</style>
+
+{% endblock content %}

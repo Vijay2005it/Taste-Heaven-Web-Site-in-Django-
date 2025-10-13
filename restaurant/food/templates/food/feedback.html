@@ -1,0 +1,88 @@
+{% extends "food/base.html" %}
+{% block content %}
+<div class="container py-5 d-flex flex-column align-items-center justify-content-center mt-5" style="min-height:100vh;">
+
+  <h2 class="text-center mb-5 fw-bold" style="color:#0d6efd;">
+    💬 We Value Your Feedback
+  </h2>
+
+  {% include "food/includes/error.html" %}
+
+  <!-- Feedback Form -->
+  <div class="card shadow-lg border-0 mb-5 w-100" style="max-width:600px; border-radius:15px;">
+    <div class="card-body p-4">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Your Feedback</label>
+          <textarea name="message" class="form-control border-2 shadow-sm"
+                    rows="4" placeholder="Share your thoughts..." required></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Rating</label>
+          <select name="rating" class="form-select border-2 shadow-sm" required>
+            <option value="">Select Rating</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fw-semibold py-2">
+          <i class="bi bi-send-fill me-1"></i> Submit Feedback
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Previous Feedbacks -->
+  <div class="w-100" style="max-width:800px;">
+    <h4 class="mb-3 fw-bold text-secondary text-center">
+      <i class="bi bi-clock-history me-2"></i>Your Previous Feedbacks
+    </h4>
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table table-hover table-striped align-middle mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Message</th>
+            <th>Rating</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fb in feedbacks %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ fb.message }}</td>
+            <td>
+              <span style="color:#fbbf24;">
+                {% for i in "12345"|slice:":fb.rating"|make_list %}⭐{% endfor %}
+              </span>
+            </td>
+            <td>{{ fb.created_at|date:"d M Y, h:i A" }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4" class="text-center text-muted py-3">No feedback yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: "Poppins", sans-serif;
+  }
+  textarea:focus, select:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.25);
+  }
+  .table-hover tbody tr:hover {
+    background-color: #f1f5ff;
+  }
+</style>
+{% endblock %}

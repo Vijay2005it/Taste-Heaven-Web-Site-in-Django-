@@ -1,0 +1,152 @@
+{% extends "food/base.html" %}
+{% block content %}
+{% include "food/includes/error.html" %}
+
+<!-- 🍷 HERO SECTION -->
+<section id="home" class="hero position-relative d-flex align-items-center justify-content-center text-center text-white"
+  style="min-height: 90vh; background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1800&auto=format&fit=crop&crop=entropy') center/cover no-repeat;">
+  
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity:0.65;"></div>
+
+  <div class="hero-content position-relative p-4 rounded-4 shadow-lg"
+       style="backdrop-filter: blur(8px); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+    <h1 class="display-3 fw-bold mb-3" style="font-family: 'Playfair Display', serif;">
+      Welcome to <span class="text-warning">TasteHeaven</span>
+    </h1>
+    <p class="lead text-light mb-4 fst-italic">
+      “Where fine dining meets timeless flavor” 🍽️
+    </p>
+    <a href="#specials" class="btn btn-warning btn-lg shadow px-4 py-2 fw-semibold rounded-pill">
+      Explore Our Menu
+    </a>
+  </div>
+</section>
+
+
+<!-- 🍝 SPECIALS SECTION (Horizontal Scroll) -->
+<section id="specials" class="py-5" style="background:#fffaf3;">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-5 display-6" style="font-family:'Playfair Display',serif;">
+      Our <span class="text-warning">Signature Dishes</span>
+    </h2>
+
+    <!-- Horizontal Scroll Wrapper -->
+    <div class="menu-scroll">
+      {% for item in food_items %}
+      <div class="card border-0 shadow-lg rounded-4 overflow-hidden menu-card">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="card-img-top" style="height:220px; object-fit:cover;">
+        {% else %}
+        <img src="https://via.placeholder.com/300x220?text=No+Image" class="card-img-top" alt="No image">
+        {% endif %}
+        <div class="card-body text-start p-3">
+          <h6 class="fw-bold mb-1" style="font-family:'Poppins',sans-serif;">{{ item.name }}</h6>
+          <p class="text-muted small mb-2">{{ item.description|truncatechars:50 }}</p>
+          <div class="fw-semibold text-success mb-3">₹{{ item.price }}</div>
+          <a href="{% url 'food:order_page' item.id %}" class="btn btn-outline-warning btn-sm w-100 fw-semibold rounded-pill">Order Now</a>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-muted">Specials coming soon...</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- 👨‍🍳 CHEF SECTION (Light Version) -->
+<section class="py-5 text-center" style="background:#fffaf3;">
+  <div class="container">
+    <h2 class="fw-bold mb-4" style="font-family:'Playfair Display', serif; color:#333;">
+      Meet Our <span class="text-warning">Master Chef</span>
+    </h2>
+    <figure>
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80"
+           class="rounded-circle shadow border border-3 border-warning mb-3"
+           width="170" height="170" style="object-fit:cover;">
+      <figcaption>
+        <h4 class="fw-semibold mb-1 text-dark">Chef VijayaKumar</h4>
+        <p class="fst-italic small text-muted">“Cooking is my language of love.”</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<!-- 🖼️ GALLERY SECTION -->
+<section id="gallery" class="py-5" style="background:#fffaf3;">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-5 display-6" style="font-family:'Playfair Display',serif;">Our <span class="text-warning">Gallery</span></h2>
+    <div class="row g-4 justify-content-center">
+      {% for img in gallery_images %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card border-0 shadow rounded-4 overflow-hidden hover-scale bg-white">
+          <img src="{{ img.image.url }}" class="img-fluid" style="height:210px;object-fit:cover;">
+          <div class="card-body p-2">
+            <p class="fw-semibold mb-2">{{ img.caption }}</p>
+            <a href="{% url 'food:gallery_order' img.id %}" class="btn btn-warning btn-sm w-100 fw-semibold rounded-pill shadow-sm">🛒 Buy Now</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-muted">Gallery will be updated soon.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ✨ ANIMATIONS + EFFECTS -->
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* 🌟 Horizontal Scroll Styling */
+  .menu-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+  }
+  .menu-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  .menu-scroll::-webkit-scrollbar-thumb {
+    background: #ffc107;
+    border-radius: 10px;
+  }
+  .menu-scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  .menu-card {
+    flex: 0 0 auto;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1rem;
+    background: #fff;
+  }
+  .menu-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+  }
+  .menu-card img {
+    transition: transform 0.3s ease;
+  }
+  .menu-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+  }
+
+  .hero-content {
+    animation: fadeIn 1.4s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+
+{% endblock content %}

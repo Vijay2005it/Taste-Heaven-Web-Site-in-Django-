@@ -1,0 +1,79 @@
+{% extends "food/base.html" %}
+
+{% block content %}
+<section class="py-5 mt-5" style="background-color: #fffaf3;">
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    
+    <div class="card shadow-lg border-0 p-4 rounded-4" style="max-width: 450px; width: 100%;">
+      
+      <h3 class="text-center mb-4 fw-bold" style="color: #b45309;">
+        🍽️ Create Your Account
+      </h3>
+
+      {% include "food/includes/error.html" %}
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="fullName" class="form-label fw-semibold">Full Name</label>
+          <input id="fullName" type="text" name="username" class="form-control form-control-lg rounded-3" placeholder="Enter your name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input id="email" type="email" name="email" class="form-control form-control-lg rounded-3" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input id="password" type="password" name="password" class="form-control form-control-lg rounded-3" placeholder="Enter password" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label fw-semibold">Confirm Password</label>
+          <input id="confirmPassword" type="password" name="confirm_password" class="form-control form-control-lg rounded-3" placeholder="Re-enter password" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="userType" class="form-label fw-semibold">User Type</label>
+          <select id="userType" name="user_type" class="form-select form-select-lg rounded-3" required>
+            <option value="" disabled selected>Select user type</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn w-100 py-2 fw-semibold text-dark shadow-sm rounded-pill"
+                style="background-color: #facc15; font-size: 1.1rem;">
+          Register
+        </button>
+
+        <p class="text-center mt-3">
+          Already have an account?
+          <a href="{% url 'food:login' %}" class="fw-bold text-decoration-none" style="color: #b45309;">
+            Login here
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Styling -->
+<style>
+  input:focus, select:focus {
+    border-color: #facc15 !important;
+    box-shadow: 0 0 0 0.2rem rgba(250, 204, 21, 0.25);
+  }
+  .card {
+    transition: all 0.3s ease-in-out;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .btn:hover {
+    background-color: #fbbf24 !important;
+  }
+</style>
+{% endblock %}

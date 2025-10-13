@@ -1,0 +1,136 @@
+<!-- ===== FOODIE NAVBAR ===== -->
+<header>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark shadow-sm"
+       style="backdrop-filter: blur(12px); background: rgba(0,0,0,0.55);">
+    <div class="container py-1">
+
+      <!-- 🍴 Brand Name -->
+      <a class="navbar-brand fw-bold fs-3 text-warning" href="/" style="font-family:'Playfair Display',serif;">
+        <i class="bi bi-egg-fried me-2"></i>Taste<span class="text-light">Heaven</span>
+      </a>
+
+      <!-- ☰ Toggle Button -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- 🌟 Nav Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          
+          <li class="nav-item mx-2">
+            <a class="nav-link active text-uppercase" href="/">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-uppercase" href="{% url 'food:about_page' %}">About</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-uppercase" href="/#specials">Specials</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-uppercase" href="/#chef">Chef</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-uppercase" href="/#gallery">Gallery</a>
+          </li>
+
+          <!-- 🍋 Contact visible only to non-admin -->
+          {% if not user.is_authenticated or user.user_type != "admin" %}
+          <li class="nav-item mx-2">
+            <a class="nav-link text-uppercase" href="{% url 'food:contact' %}">Contact</a>
+          </li>
+          {% endif %}
+
+          <!-- 🔑 Admin Dashboard -->
+          {% if user.is_authenticated and user.user_type == "admin" %}
+          <li class="nav-item mx-2">
+            <a href="{% url 'food:admin_dashboard' %}" class="nav-link text-uppercase text-warning fw-semibold">
+              <i class="bi bi-speedometer2 me-1"></i>Dashboard
+            </a>
+          </li>
+          {% endif %}
+
+          <!-- 🔘 Auth Buttons -->
+          {% if user.is_authenticated %}
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a href="{% url 'food:login' %}" class="btn btn-sm btn-danger rounded-pill px-3 fw-semibold shadow-sm">
+              Logout
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a href="{% url 'food:login' %}" class="btn btn-sm btn-outline-warning rounded-pill px-3 fw-semibold me-2 shadow-sm">
+              Login
+            </a>
+            <a href="{% url 'food:register' %}" class="btn btn-sm btn-warning text-dark rounded-pill px-3 fw-semibold shadow-sm">
+              Register
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 🌈 STYLE SECTION -->
+<style>
+  .navbar {
+    transition: all 0.4s ease;
+  }
+  .navbar-nav .nav-link {
+    font-weight: 500;
+    color: #f8f9fa !important;
+    position: relative;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: #ffc107 !important;
+  }
+
+  /* 🍽️ Underline hover effect */
+  .navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #ffc107;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .navbar-nav .nav-link:hover::after {
+    width: 60%;
+  }
+
+  /* 🧈 Button styling */
+  .btn-auth {
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255,193,7,0.4);
+  }
+
+  /* 🪶 Blur effect on scroll */
+  .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.85) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+</style>
+
+<!-- 🧠 SMALL JS for scroll blur effect -->
+<script>
+  window.addEventListener("scroll", () => {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+</script>

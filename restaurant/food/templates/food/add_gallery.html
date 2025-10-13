@@ -1,0 +1,106 @@
+{% extends 'food/base.html' %}
+{% block content %}
+
+<section class="add-gallery py-5" style="background: linear-gradient(120deg, #fff8f0, #fff); min-height: 100vh;">
+  <div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="text-center mb-5 mt-5">
+      <h1 class="display-4 fw-bold text-success">
+        <i class="bi bi-images me-2"></i>Add New Gallery Image
+      </h1>
+      <p class="text-muted fs-5">Upload your delicious dish photo with a caption & price!</p>
+      <hr class="w-25 mx-auto border-success">
+    </div>
+
+    <!-- ===== ERROR MESSAGES ===== -->
+    {% include "food/includes/error.html" %}
+
+    <!-- ===== FORM CARD ===== -->
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg border-0 p-4 rounded-4" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);">
+          <div class="card-body">
+
+            <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+              {% csrf_token %}
+
+              <!-- Image -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-image me-2 text-success"></i>Upload Image
+                </label>
+                <input type="file" name="image" class="form-control rounded-pill shadow-sm" required>
+              </div>
+
+              <!-- Caption -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-chat-square-text me-2 text-success"></i>Caption
+                </label>
+                <input type="text" name="caption" class="form-control rounded-pill shadow-sm" placeholder="Enter image caption" required>
+              </div>
+
+              <!-- Price -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">
+                  <i class="bi bi-currency-rupee me-2 text-success"></i>Price (₹)
+                </label>
+                <input type="number" name="price" class="form-control rounded-pill shadow-sm" placeholder="Enter image price" min="0" step="0.01" required>
+              </div>
+
+              <!-- Buttons -->
+              <div class="text-center">
+                <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm me-2">
+                  ➕ Add Image
+                </button>
+                <a href="{% url 'food:admin_dashboard' %}" class="btn btn-outline-danger px-5 py-2 rounded-pill mt-3">
+                  ✖ Cancel
+                </a>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Card hover lift */
+  .card {
+    transition: 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Input focus style */
+  input.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.25);
+  }
+
+  /* Button hover */
+  button.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+    transition: 0.3s;
+  }
+
+  /* Header icons */
+  h1 i {
+    font-size: 1.5rem;
+  }
+
+  /* Horizontal line style */
+  hr {
+    border-top: 3px solid #28a745;
+    opacity: 0.7;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'food/base.html' %}
+{% block content %}
+
+{% include "food/includes/error.html" %}
+
+<!-- ===== ADD FOOD FORM ===== -->
+<section class="add-food py-5" style="background: linear-gradient(120deg, #fff8f0, #fff);">
+  <div class="container d-flex justify-content-center">
+    <div class="card shadow-lg border-0 p-5 w-100" style="max-width: 600px; border-radius: 20px;">
+      
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-success">
+          🍲 Add a New Dish
+        </h2>
+        <p class="text-muted">Share your delicious creation with the world!</p>
+      </div>
+
+      <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <div class="form-floating mb-3">
+          {{ form.name }}
+          <label for="{{ form.name.id_for_label }}">Food Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          {{ form.description }}
+          <label for="{{ form.description.id_for_label }}">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          {{ form.price }}
+          <label for="{{ form.price.id_for_label }}">Price (₹)</label>
+        </div>
+
+        <div class="mb-4">
+          <label for="{{ form.image.id_for_label }}" class="form-label fw-semibold">Upload Image</label>
+          {{ form.image }}
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm me-2">
+            ➕ Add Food
+          </button>
+          <a href="{% url 'food:admin_dashboard' %}" class="btn btn-outline-danger px-5 py-2 rounded-pill">
+            ✖ Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-floating label {
+    color: #777;
+  }
+
+  input, textarea, select {
+    border-radius: 10px !important;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease;
+  }
+
+  button.btn-success:hover {
+    background-color: #28a745;
+    transform: scale(1.05);
+  }
+</style>
+
+{% endblock %}

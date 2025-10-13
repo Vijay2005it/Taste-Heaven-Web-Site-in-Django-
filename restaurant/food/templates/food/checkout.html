@@ -1,0 +1,82 @@
+{% extends 'food/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- ===== CHECKOUT HEADER ===== -->
+  <div class="text-center mb-5 mt-5">
+    <h2 class="fw-bold text-success"><i class="bi bi-bag-check me-2"></i>Checkout</h2>
+    <p class="text-muted fs-6">Review your items before proceeding to payment 🍽️</p>
+    <hr class="w-25 mx-auto border-success opacity-75">
+  </div>
+
+  {% if food_orders or gallery_orders %}
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-success">
+        <tr>
+          <th>Item</th>
+          <th>Price (₹)</th>
+          <th>Quantity</th>
+          <th>Subtotal (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in food_orders %}
+        <tr>
+          <td>{{ order.item.name }}</td>
+          <td>₹{{ order.item.price }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>₹{{ order.total_price }}</td>
+        </tr>
+        {% endfor %}
+
+        {% for g in gallery_orders %}
+        <tr>
+          <td>{{ g.gallery_item.caption }}</td>
+          <td>₹{{ g.gallery_item.price }}</td>
+          <td>{{ g.quantity }}</td>
+          <td>₹{{ g.total_price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOTAL AMOUNT -->
+  <div class="d-flex justify-content-end mt-4">
+    <h4 class="fw-bold text-success">Total: ₹{{ total }}</h4>
+  </div>
+
+  <!-- PROCEED TO PAYMENT -->
+  <div class="text-center mt-4">
+    <form method="post" action="{% url 'food:checkout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success btn-lg rounded-pill shadow-sm px-5 py-2">
+        Proceed to Payment
+      </button>
+    </form>
+  </div>
+
+  {% else %}
+    <p class="text-center text-muted fs-5">🛒 Your cart is empty. Start adding some delicious items!</p>
+  {% endif %}
+
+</div>
+
+<!-- ===== CUSTOM STYLES ===== -->
+<style>
+  table thead th {
+    font-weight: 600;
+  }
+  table tbody td {
+    vertical-align: middle;
+  }
+  .btn-success:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+  }
+</style>
+
+{% endblock %}
