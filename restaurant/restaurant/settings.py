@@ -62,10 +62,6 @@ WSGI_APPLICATION = 'restaurant.wsgi.application'
 # -------------------------------
 # Database Configuration
 # -------------------------------
-# For Render (uses environment variables)
-# -------------------------------
-# Database Configuration
-# -------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -76,7 +72,6 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
-
 
 # -------------------------------
 # Password validation
