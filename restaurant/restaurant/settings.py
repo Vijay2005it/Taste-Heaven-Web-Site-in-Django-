@@ -63,12 +63,20 @@ WSGI_APPLICATION = 'restaurant.wsgi.application'
 # Database Configuration
 # -------------------------------
 # For Render (uses environment variables)
+# -------------------------------
+# Database Configuration
+# -------------------------------
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"mysql://{os.environ.get('DB_USER', 'root')}:{os.environ.get('DB_PASSWORD', 'Vijay@122005')}@{os.environ.get('DB_HOST', 'localhost')}/{os.environ.get('DB_NAME', 'food')}",
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+    }
 }
+
 
 # -------------------------------
 # Password validation
